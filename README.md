@@ -10,7 +10,7 @@ Welcome to the Pet API repository! This project provides a simple CRUD (Create, 
 
 ## Getting Started
 
-To run the Pet API locally, follow these steps:
+I. To run the Pet API locally, follow these steps:
 
 1. Clone the repository:
 
@@ -30,7 +30,7 @@ To run the Pet API locally, follow these steps:
    ./mvnw spring-boot:run
    ```
 
-To run the Pet API locally using Docker Compose, follow these steps:
+II. To run the Pet API locally using Docker Compose, follow these steps:
 
 1. Clone the repository:
 
