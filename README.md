@@ -30,6 +30,28 @@ To run the Pet API locally, follow these steps:
    ./mvnw spring-boot:run
    ```
 
+To run the Pet API locally using Docker Compose, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Oluwaseun-Smart/pet-store.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd pet
+   ```
+
+3. Build and run the application with Docker Compose:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   This command will start the Pet API and a MongoDB container.
+
 ## API Endpoints
 
 - **Get All Pets:**
