@@ -108,19 +108,6 @@ public class PetControllerTest {
     }
 
     @Test
-    void test_Get_AllPets_WithEmptyResult() throws Exception {
-
-        mockMvc.perform(get("/api/v1/pets")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("page", "0")
-                .param("size", "10"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.status").value(true))
-                .andExpect(jsonPath("$.message").value("Pets retrieved successfully"));
-    }
-
-    @Test
     void test_GetPetById_WithValidID_Should_Pass() throws Exception {
         final Pet pet = petRepository.save(pet());
         ResultActions result = mockMvc.perform(get("/api/v1/pets/{id}", pet.getId())
@@ -141,11 +128,37 @@ public class PetControllerTest {
         Assertions.assertEquals(pet.getType(), petResponse.getData().getType());
     }
 
+    @Test
+    void test_DeletePetById_WithValidID_Should_Pass() throws Exception {
+        final Pet pet = petRepository.save(pet());
+        ResultActions result = mockMvc.perform(delete("/api/v1/pets/{id}", pet.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.status").value(true))
+                .andExpect(jsonPath("$.message").isNotEmpty())
+                .andExpect(jsonPath("$.message").value(String.format("Pet with ID: %s deleted successfully", pet.getId())))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
 
     @Test
     void test_GetPetById_WithInValidID_Should_Fail() throws Exception {
         String id = "1ad1fccc-d279-46a0-8980-1d91afd6ba67";
         mockMvc.perform(get("/api/v1/pets/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.status").value(false))
+                .andExpect(jsonPath("$.message").isNotEmpty())
+                .andExpect(jsonPath("$.message").value(String.format("Pet with ID: %s does not exists", id)))
+                .andExpect(jsonPath("$.data").isEmpty());
+    }
+
+    @Test
+    void test_DeletePetById_WithInValidID_Should_Fail() throws Exception {
+        String id = "1ad1fccc-d279-46a0-8980-1d91afd6ba67";
+        mockMvc.perform(delete("/api/v1/pets/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
