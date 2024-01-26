@@ -11,7 +11,7 @@ services:
       - pet-apis-network
 
   pet-apis:
-    image: oosdev/pet-apis:v1.4
+    image: oosdev/pet-apis:v1.5
     mem_limit: 700m
     ports:
       - "7076:7076"
