@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+
+  mongo:
+    image: mongo
+    mem_limit: 700m
+    ports:
+      - "27017:27017"
+    networks:
+      - pet-apis-network
+
+  pet-apis:
+    image: oosdev/pet-apis:v1.4
+    mem_limit: 700m
+    ports:
+      - "7076:7076"
+    networks:
+      - pet-apis-network
+    depends_on:
+      - mongo
+
+networks:
+  pet-apis-network:
