@@ -88,4 +88,12 @@ public class PetService {
                 () -> new PetNotFoundException(String.format("Pet with ID: %s does not exists", id))
         );
     }
+
+    public void deletePetById(String id) throws PetNotFoundException {
+        final Pet pet = this.petRepository.findById(id).orElseThrow(
+                () -> new PetNotFoundException(String.format("Pet with ID: %s does not exists", id))
+        );
+
+        this.petRepository.delete(pet);
+    }
 }

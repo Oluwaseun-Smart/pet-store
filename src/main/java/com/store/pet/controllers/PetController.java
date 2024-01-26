@@ -104,4 +104,24 @@ public class PetController {
             return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Status<Object>> deletePetById(@PathVariable String id) {
+        try {
+            this.petService.deletePetById(id);
+
+            final Status<Object> petResponse = Status.builder()
+                    .message(String.format("Pet with ID: %s deleted successfully", id))
+                    .status(true)
+                    .build();
+
+            return new ResponseEntity<>(petResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            final Status<Object> error = Status.builder()
+                    .message(e.getMessage())
+                    .status(false)
+                    .build();
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        }
+    }
 }
