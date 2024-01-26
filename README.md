@@ -1,7 +1,4 @@
 # Pet API
-
-![Pet API Logo](./pet-api-logo.png)
-
 Welcome to the Pet API repository! This project provides a simple CRUD (Create, Read, Update, Delete) API for managing information about pets. Built with Spring Boot and MongoDB, it offers a scalable and efficient solution for pet data management.
 
 ## Features
